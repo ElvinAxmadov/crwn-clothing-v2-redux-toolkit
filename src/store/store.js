@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { rootReducer } from "./root-reducer";
 // import { compose, createStore, applyMiddleware } from 'redux';
 // import { persistStore, persistReducer } from 'redux-persist';
@@ -27,6 +27,7 @@ const middleWares = [process.env.NODE_ENV === "development" && logger].filter(
 
 export const store = configureStore({
   reducer: rootReducer,
-  // middleware: middleWares,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middleWares),
 });
 // export const persistor = persistStore(store);
